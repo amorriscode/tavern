@@ -1,10 +1,15 @@
 import { Link, routes } from '@redwoodjs/router'
 
+import { NAV_HEIGHT } from 'src/constants'
+
 import Logo from 'src/components/Logo'
 
 const Nav = () => {
   return (
-    <div className="flex justify-between p-4 border-b-2 border-brand-purple mb-4">
+    <div
+      className="flex justify-between p-4 border-b-2 border-brand-purple"
+      style={{ height: NAV_HEIGHT }}
+    >
       <div className="w-1/2">
         <Logo />
       </div>
