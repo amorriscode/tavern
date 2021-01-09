@@ -11,3 +11,11 @@
 /**
  * END --- TAILWIND GENERATOR EDIT
  */
+
+body {
+  @apply bg-brand-white;
+}
+
+a:hover {
+  @apply text-brand-purple;
+}
