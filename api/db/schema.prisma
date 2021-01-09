@@ -11,17 +11,18 @@ generator client {
 }
 
 model Difficulty {
-  name String @id
-  color String
+  name        String    @id
+  color       String
   description String
+  Problem     Problem[]
 }
 
 model TestCase {
-  id Int @id @default(autoincrement())
-  problem Problem @relation(fields: [problemId], references: [id])
+  id        Int     @id @default(autoincrement())
+  problem   Problem @relation(fields: [problemId], references: [id])
   problemId Int
-  input String
-  output String
+  input     String
+  output    String
 }
 
 enum Language {
@@ -29,22 +30,22 @@ enum Language {
 }
 
 model Scaffold {
-  id Int @id @default(autoincrement())
-  problem Problem @relation(fields: [problemId], references: [id])
+  id        Int      @id @default(autoincrement())
+  problem   Problem  @relation(fields: [problemId], references: [id])
   problemId Int
-  body String
-  language Language
+  body      String
+  language  Language
 }
 
 model Problem {
-  id Int @id @default(autoincrement())
-  name String
-  description String
-  difficulty Difficulty @relation(fields: [difficultyName], references: [name])
+  id             Int        @id @default(autoincrement())
+  name           String
+  description    String
+  difficulty     Difficulty @relation(fields: [difficultyName], references: [name])
   difficultyName String
-  hints String[]
-  sampleInput String
-  sampleOutput String
-  testCases TestCase[]
-  scaffold Scaffold[]
+  hints          String[]
+  sampleInput    String
+  sampleOutput   String
+  testCases      TestCase[]
+  scaffold       Scaffold[]
 }
