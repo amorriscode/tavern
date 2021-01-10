@@ -1,3 +1,9 @@
 # Prisma Migrate lockfile v1
 
 20210110032941-init
+20210110041559-entrypoints
+20210110074350-solution
+20210110081724-solution-stacktrace
+20210110085610-solution-error-logs
+20210110090345-solution-error-logs-array
+20210110090426-solution-error-logs-array

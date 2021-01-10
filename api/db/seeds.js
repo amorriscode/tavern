@@ -99,6 +99,7 @@ async function seedProblems() {
         sampleOutput: metadata.sample.output,
         testCases: { create: testCases },
         scaffolds: { connectOrCreate: scaffolds },
+        entrypoints: metadata.entrypoints,
       }
 
       model['checksum'] = hash(model)
@@ -111,6 +112,8 @@ async function seedProblems() {
           console.info(
             `Outdated checksum for problem ${model.id} (${problem})! Updating DB.`
           )
+
+          await db.testCase.deleteMany({ where: { problemId: metadata.id } })
           await db.problem.update({
             where: { id: metadata.id },
             data: model,

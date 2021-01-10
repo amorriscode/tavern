@@ -1,0 +1,19 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "entrypoints",
+      "type": "Json",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Guild",
+      "field": "Transaction",
+      "type": "Transaction",
+      "arity": "List"
+    }
+  ]
+}

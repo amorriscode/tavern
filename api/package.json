@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@redwoodjs/api": "^0.22.1",
-    "object-hash": "^2.1.1"
+    "object-hash": "^2.1.1",
+    "vm2": "^3.9.2"
   }
 }

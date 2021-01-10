@@ -11,5 +11,8 @@
   "sample": {
     "input": "[3, 5, -4, 8, 11, 1, -1, 6], 10",
     "output": "[-1, 11] // the numbers could be in reverse order"
+  },
+  "entrypoints": {
+    "js": "twoSum($1, $2)"
   }
 }
