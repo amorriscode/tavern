@@ -1,0 +1,15 @@
+{
+  "id": 0,
+  "name": "Two Sum",
+  "description": "Write a function that takes a non-empty array of distinct integers and an integer representing a target sum. If any two numbers in the input array sum up to the target sum, the function should return them in an array, in any order. If no two numbers sum up to the target sum, the function should return an empty array.",
+  "difficulty": "Easy",
+  "hints": [
+    "Try using two for loops to sum all possible pairs of numbers in the input array. What are the time and space implications of this approach?",
+    "Realize for every number X in the input array, you are solving for Y such that X + Y = targetSum.",
+    "Try storing every number in a hash table and solving for equation mentioned in hint 2 for every number and if Y is stored in the hash table. What are the time and space implications of this approach?"
+  ],
+  "sample": {
+    "input": "[3, 5, -4, 8, 11, 1, -1, 6], 10",
+    "output": "[-1, 11] // the numbers could be in reverse order"
+  }
+}
