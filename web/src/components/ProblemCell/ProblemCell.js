@@ -93,7 +93,7 @@ export const Success = ({ problem, navHeight }) => {
             onChange={handleCodeChange}
           />
 
-          <Console />
+          <Console problem={problem.id} code={code} language={language} />
         </div>
       </div>
 

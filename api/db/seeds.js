@@ -38,7 +38,7 @@ async function createOrUpdateDifficulty(name, color, description) {
 
 async function seedProblems() {
   const problems = await fs.readdir(problemRoot)
-  for (problem of problems) {
+  for (var problem of problems) {
     const stat = await fs.lstat(`${problemRoot}/${problem}`)
     if (stat.isDirectory()) {
       console.info(`Attempting to seed problem from directory '${problem}'..`)
@@ -63,7 +63,7 @@ async function seedProblems() {
       const scaffoldFiles = await fs.readdir(
         `${problemRoot}/${problem}/scaffolds`
       )
-      for (scaffoldName of scaffoldFiles) {
+      for (var scaffoldName of scaffoldFiles) {
         const extension = scaffoldName.split('.').pop()
         const body = await fs.readFile(
           `${problemRoot}/${problem}/scaffolds/${scaffoldName}`,
@@ -82,7 +82,7 @@ async function seedProblems() {
       }
 
       const testCases = []
-      for (rawTestCase of rawTestCases) {
+      for (var rawTestCase of rawTestCases) {
         testCases.push({
           input: JSON.stringify(rawTestCase.input),
           output: JSON.stringify(rawTestCase.output),
@@ -99,6 +99,7 @@ async function seedProblems() {
         sampleOutput: metadata.sample.output,
         testCases: { create: testCases },
         scaffolds: { connectOrCreate: scaffolds },
+        entrypoints: metadata.entrypoints,
       }
 
       model['checksum'] = hash(model)
@@ -111,6 +112,8 @@ async function seedProblems() {
           console.info(
             `Outdated checksum for problem ${model.id} (${problem})! Updating DB.`
           )
+
+          await db.testCase.deleteMany({ where: { problemId: metadata.id } })
           await db.problem.update({
             where: { id: metadata.id },
             data: model,
