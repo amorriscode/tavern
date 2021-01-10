@@ -17,7 +17,7 @@ const Hint = ({ hint, hintNumber }) => {
         </div>
       </div>
 
-      {displayHint && <div>{hint}</div>}
+      {displayHint && <div className="mt-2">{hint}</div>}
     </div>
   )
 }
