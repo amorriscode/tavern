@@ -101,8 +101,12 @@ import { db } from './db'
  */
 export const getCurrentUser = async (decoded, { token }) => {
   const mAdmin = new Magic(process.env.MAGICLINK_SECRET)
-  const { email, publicAddress, issuer } = await mAdmin.users.getMetadataByToken(token)
-  return db.userExample.findUnique( { where: { issuer }})
+  const {
+    email,
+    publicAddress,
+    issuer,
+  } = await mAdmin.users.getMetadataByToken(token)
+  return db.userExample.findUnique({ where: { issuer } })
 }
 
 /**
