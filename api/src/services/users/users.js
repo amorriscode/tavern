@@ -4,6 +4,17 @@ export const users = () => {
   return db.user.findMany()
 }
 
+export const topUsers = () => {
+  return db.user.findMany({
+    orderBy: [
+      {
+        level: 'desc',
+      },
+    ],
+    take: 50,
+  })
+}
+
 export const user = ({ id }) => {
   console.log(id)
   return db.user.findUnique({

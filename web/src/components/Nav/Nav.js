@@ -19,7 +19,7 @@ const Nav = () => {
 
         <Link to={routes.home()}>Guild</Link>
 
-        <Link to={routes.home()}>Leaderboard</Link>
+        <Link to={routes.leaderboard()}>Leaderboard</Link>
 
         <Link to={routes.home()}>Settings</Link>
 

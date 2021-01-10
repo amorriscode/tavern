@@ -7,6 +7,17 @@ export const guilds = () => {
   return db.guild.findMany()
 }
 
+export const topGuilds = () => {
+  return db.guild.findMany({
+    orderBy: [
+      {
+        experience: 'desc',
+      },
+    ],
+    take: 50,
+  })
+}
+
 export const guild = ({ id }) => {
   return db.guild.findUnique({
     where: { id },
