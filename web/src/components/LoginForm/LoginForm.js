@@ -19,16 +19,18 @@ const LoginForm = ({ onChangeForm, onAuthentication }) => {
         Ready to solve your next quest?
       </div>
 
-      <form action="#" className="relative">
-        <IoMailOpenOutline className="absolute top-0 left-0 text-xl ml-3 mt-3" />
+      <form action="#">
+        <div className="relative">
+          <IoMailOpenOutline className="absolute top-0 left-0 text-xl ml-3 mt-3" />
 
-        <input
-          type="email"
-          placeholder="Email address"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-          className="border rounded border-brand-purple bg-brand-white p-2 pl-10 w-full"
-        />
+          <input
+            type="email"
+            placeholder="mj@gmail.com"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            className="border rounded border-brand-purple bg-brand-white p-2 pl-10 w-full focus:border-brand-pink"
+          />
+        </div>
 
         <button
           className=" bg-brand-purple text-brand-white hover:bg-opacity-75 hover:cursor-pointer w-full mt-2 py-2 rounded justify-center"
