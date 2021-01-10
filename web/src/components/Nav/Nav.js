@@ -7,8 +7,34 @@ import SettingsIcon from 'src/navbar-icons/settings.svg'
 
 import Logo from 'src/components/Logo'
 import AuthModal from 'src/components/AuthModal'
+import { useAuth } from '@redwoodjs/auth'
+import Character from 'src/components/Character'
 
 const Nav = () => {
+  const { currentUser } = useAuth()
+
+  let profilePicture = <div></div>
+  if (currentUser && currentUser.outfit) {
+    const outfit = currentUser.outfit
+    profilePicture = (
+      <Character
+        id="me"
+        skin={outfit.skin}
+        size={33}
+        head={outfit.head}
+        body={outfit.body}
+        ear={outfit.ears}
+        eye={outfit.eyes}
+        facial={outfit.facial}
+        hair={outfit.hair}
+        hairColour={outfit.hairColour}
+        mouth={outfit.mouth}
+        neck={outfit.neck}
+        nose={outfit.nose}
+      />
+    )
+  }
+
   return (
     <nav className="flex justify-between p-4 border-b-2 border-brand-purple">
       <div className="w-1/2">
@@ -30,11 +56,7 @@ const Nav = () => {
         </Link>
         <Link to={routes.leaderboard()}>Leaderboard</Link>
 
-        <Link to={routes.home()}>
-          <SettingsIcon className="w-8"></SettingsIcon>
-        </Link>
-        <Link to={routes.home()}>Settings</Link>
-
+        {profilePicture}
         <AuthModal />
       </div>
     </nav>
