@@ -1,8 +1,17 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, Redirect } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
 
 import AppLayout from 'src/layouts/AppLayout'
 
 const HomePage = () => {
+  const { currentUser, isAuthenticated } = useAuth()
+
+  if (isAuthenticated && currentUser) {
+    if (!currentUser.outfit) {
+      return <Redirect to={routes.finish()}></Redirect>
+    }
+  }
+
   return (
     <AppLayout>
       <h1>HomePage</h1>
