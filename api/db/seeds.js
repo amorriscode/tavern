@@ -161,6 +161,26 @@ async function seedUsers() {
           },
         })
 
+        const problems = await db.problem.findMany()
+        const problem = problems[Math.floor(Math.random() * problems.length)]
+
+        await db.assignedProblem.create({
+          data: {
+            remaining: 20,
+            required: 20,
+            problem: {
+              connect: {
+                id: problem.id,
+              },
+            },
+            guild: {
+              connect: {
+                id: tG.id,
+              },
+            },
+          },
+        })
+
         lastGuildId = tG.id
         guild = { connect: { id: lastGuildId } }
       }
