@@ -2,7 +2,7 @@ datasource DS {
   // optionally set multiple providers
   // example: provider = ["sqlite", "postgresql"]
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -89,8 +89,6 @@ model AssignedProblem {
   guildId   String?
   createdAt DateTime @default(now())
   solved    Boolean  @default(false)
-  required  Int // how many solutions are required
-  remaining Int // how many required solutions remain
 }
 
 // experience transactions

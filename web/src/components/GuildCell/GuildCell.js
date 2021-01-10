@@ -1,5 +1,5 @@
 import { navigate, routes } from '@redwoodjs/router'
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { isPast, formatDistanceToNow } from 'date-fns'
 
 import ProblemCard from 'src/components/ProblemCard'
 
@@ -16,6 +16,10 @@ export const QUERY = gql`
         experience
       }
       assignedProblems {
+        createdAt
+        required
+        remaining
+        solved
         problem {
           id
           name
@@ -39,6 +43,14 @@ export const Success = ({ guild }) => {
   const midnight = new Date()
   midnight.setHours(24, 0, 0, 0)
 
+  const activeQuests = guild?.assignedProblems.filter(
+    (assignedProblem) => !isPast(assignedProblem.createdAt)
+  )
+
+  const previousQuests = guild?.assignedProblems.filter((assignedProblem) =>
+    isPast(assignedProblem.createdAt)
+  )
+
   return (
     <div className="container mx-auto mt-8 grid grid-cols-4 gap-12">
       <div className="text-gray-900 mb-8 col-span-2 col-start-2 row-span-1 flex justify-between items-center">
@@ -60,20 +72,34 @@ export const Success = ({ guild }) => {
             </div>
           </div>
 
-          {guild?.assignedProblems.map(({ problem }) => (
-            <ProblemCard key={problem.id} problem={problem} />
-          ))}
+          {activeQuests.length ? (
+            activeQuests.map((assignedProblem) => (
+              <ProblemCard
+                key={assignedProblem.problem.id}
+                problem={assignedProblem.problem}
+                assignedProblem={assignedProblem}
+              />
+            ))
+          ) : (
+            <div>Come back tomorrow for a more quests!</div>
+          )}
         </div>
 
-        <div>
-          <h2 className="font-extrabold text-2xl text-gray-900 mb-1">
-            Solved Quests
-          </h2>
+        {!!previousQuests.length && (
+          <div>
+            <h2 className="font-extrabold text-2xl text-gray-900 mb-1">
+              Solved Quests
+            </h2>
 
-          {guild?.assignedProblems.map(({ problem }) => (
-            <ProblemCard key={problem.id} problem={problem} />
-          ))}
-        </div>
+            {previousQuests.map((assignedProblem) => (
+              <ProblemCard
+                key={assignedProblem.problem.id}
+                problem={assignedProblem.problem}
+                assignedProblem={assignedProblem}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="col-span-1">
