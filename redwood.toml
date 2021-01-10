@@ -8,6 +8,7 @@
 [web]
   port = 8910
   apiProxyPath = "/.netlify/functions"
+  includeEnvironmentVariables = ['MAGICLINK_PUBLIC']
 [api]
   port = 8911
   schemaPath = "./api/db/schema.prisma"
