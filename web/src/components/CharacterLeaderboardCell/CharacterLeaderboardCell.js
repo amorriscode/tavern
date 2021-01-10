@@ -1,4 +1,5 @@
 import { navigate, routes } from '@redwoodjs/router'
+import Character from 'src/components/Character'
 
 export const QUERY = gql`
   query CharacterLeaderboardQuery {
@@ -9,6 +10,19 @@ export const QUERY = gql`
       guild {
         id
         name
+      }
+      outfit {
+        skin
+        head
+        body
+        ears
+        eyes
+        facial
+        hair
+        hairColour
+        mouth
+        neck
+        nose
       }
     }
   }
@@ -39,9 +53,25 @@ export const Success = ({ topUsers }) => {
             <div key={user.id} className="grid grid-cols-3 text-xl py-4">
               <div
                 onClick={() => navigate(routes.user({ id: user.id }))}
-                className="hover:text-brand-pink hover:cursor-pointer"
+                className="hover:text-brand-pink hover:cursor-pointer flex items-center"
               >
-                {user.name}
+                <Character
+                  id="me"
+                  skin={user.outfit.skin}
+                  size={25}
+                  head={user.outfit.head}
+                  body={user.outfit.body}
+                  ear={user.outfit.ears}
+                  eye={user.outfit.eyes}
+                  facial={user.outfit.facial}
+                  hair={user.outfit.hair}
+                  hairColour={user.outfit.hairColour}
+                  mouth={user.outfit.mouth}
+                  neck={user.outfit.neck}
+                  nose={user.outfit.nose}
+                />
+
+                <span className="ml-3">{user.name}</span>
               </div>
 
               <div
