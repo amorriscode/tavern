@@ -2,6 +2,13 @@
   "version": "0.3.14-fixed",
   "steps": [
     {
+      "tag": "CreateEnum",
+      "enum": "Language",
+      "values": [
+        "JAVASCRIPT"
+      ]
+    },
+    {
       "tag": "CreateSource",
       "source": "DS"
     },
@@ -25,11 +32,54 @@
     },
     {
       "tag": "CreateModel",
-      "model": "UserExample"
+      "model": "Difficulty"
     },
     {
       "tag": "CreateField",
-      "model": "UserExample",
+      "model": "Difficulty",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Difficulty",
+          "field": "name"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Difficulty",
+      "field": "color",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Difficulty",
+      "field": "description",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Difficulty",
+      "field": "Problem",
+      "type": "Problem",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "TestCase"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TestCase",
       "field": "id",
       "type": "Int",
       "arity": "Required"
@@ -39,7 +89,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "UserExample",
+          "model": "TestCase",
           "field": "id"
         },
         "directive": "id"
@@ -50,7 +100,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "UserExample",
+          "model": "TestCase",
           "field": "id"
         },
         "directive": "default"
@@ -62,7 +112,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "UserExample",
+          "model": "TestCase",
           "field": "id"
         },
         "directive": "default"
@@ -72,8 +122,79 @@
     },
     {
       "tag": "CreateField",
-      "model": "UserExample",
-      "field": "email",
+      "model": "TestCase",
+      "field": "problem",
+      "type": "Problem",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "TestCase",
+          "field": "problem"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "TestCase",
+          "field": "problem"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[problemId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "TestCase",
+          "field": "problem"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TestCase",
+      "field": "problemId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TestCase",
+      "field": "input",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TestCase",
+      "field": "output",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "Scaffold"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Scaffold",
+      "field": "id",
       "type": "String",
       "arity": "Required"
     },
@@ -82,16 +203,207 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "UserExample",
-          "field": "email"
+          "model": "Scaffold",
+          "field": "id"
         },
-        "directive": "unique"
+        "directive": "id"
       }
     },
     {
       "tag": "CreateField",
-      "model": "UserExample",
+      "model": "Scaffold",
+      "field": "problem",
+      "type": "Problem",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Scaffold",
+          "field": "problem"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Scaffold",
+          "field": "problem"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[problemId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Scaffold",
+          "field": "problem"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Scaffold",
+      "field": "problemId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Scaffold",
+      "field": "body",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Scaffold",
+      "field": "language",
+      "type": "Language",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "Problem"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Problem",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
       "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "description",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "difficulty",
+      "type": "Difficulty",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Problem",
+          "field": "difficulty"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Problem",
+          "field": "difficulty"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[difficultyName]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Problem",
+          "field": "difficulty"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[name]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "difficultyName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "hints",
+      "type": "String",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "sampleInput",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "sampleOutput",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "testCases",
+      "type": "TestCase",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "scaffolds",
+      "type": "Scaffold",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "checksum",
       "type": "String",
       "arity": "Optional"
     },

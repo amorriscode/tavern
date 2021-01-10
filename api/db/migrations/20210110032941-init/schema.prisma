@@ -38,7 +38,7 @@ model Scaffold {
 }
 
 model Problem {
-  id             Int        @id @default(autoincrement())
+  id             Int        @id
   name           String
   description    String
   difficulty     Difficulty @relation(fields: [difficultyName], references: [name])
@@ -47,5 +47,25 @@ model Problem {
   sampleInput    String
   sampleOutput   String
   testCases      TestCase[]
-  scaffold       Scaffold[]
+  scaffolds      Scaffold[]
+  checksum       String?
+}
+
+model Guild {
+  id String @id @default(uuid())
+  name String
+  experience Int @default(0)
+  createdAt DateTime @default(now())
+}
+
+// experience transactions
+model Transaction {
+  id String @id @default(uuid())
+  guild Guild? @relation(fields: [guildId], references: [id])
+  guildId String?
+  delta Int
+  result Int // total experience after delta
+  time DateTime @default(now())
+  // todo: user id
+  // transactions can exist for both users + guilds
 }
