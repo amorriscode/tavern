@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import { NavLink, routes } from '@redwoodjs/router'
 
 import GuildIcon from 'src/navbar-icons/guild.svg'
 import LeaderboardIcon from 'src/navbar-icons/leaderboard.svg'
@@ -14,7 +14,7 @@ const Nav = () => {
   const { currentUser } = useAuth()
 
   let profilePicture = <div></div>
-  if (currentUser && currentUser.outfit) {
+  if (currentUser?.outfit) {
     const outfit = currentUser.outfit
     profilePicture = (
       <Character
@@ -45,18 +45,21 @@ const Nav = () => {
         </div>
       </div>
 
-      <div className="w-1/2 space-x-4 flex justify-end items-center">
-        <Link to={routes.home()}>
-          <GuildIcon className="w-8"></GuildIcon>
-        </Link>
-        <Link to={routes.home()}>Guild</Link>
+      <div className="w-1/2 space-x-8 flex justify-end items-center">
+        <NavLink
+          to={routes.guild({ id: currentUser?.guild?.id })}
+          activeClassName="text-brand-pink"
+          className="hover:text-brand-pink"
+        >
+          Guild
+        </NavLink>
 
-        <Link to={routes.leaderboard()}>
-          <LeaderboardIcon className="w-8"></LeaderboardIcon>
-        </Link>
-        <Link to={routes.leaderboard()}>Leaderboard</Link>
+        <NavLink to={routes.leaderboard()} className="hover:text-brand-pink">
+          Leaderboard
+        </NavLink>
 
-        {profilePicture}
+        <div className="flex justify-center items-center">{profilePicture}</div>
+
         <AuthModal />
       </div>
     </nav>

@@ -1,4 +1,4 @@
-import { AuthenticationError, ForbiddenError, parseJWT } from '@redwoodjs/api'
+import { AuthenticationError, ForbiddenError } from '@redwoodjs/api'
 import { Magic } from '@magic-sdk/admin'
 import { db } from './db'
 
@@ -11,7 +11,10 @@ export const getCurrentUser = async (decoded, { token }) => {
     issuer,
   } = await mAdmin.users.getMetadataByToken(token)
 
-  return db.user.findUnique({ where: { email }, include: { outfit: true, guild: true } })
+  return db.user.findUnique({
+    where: { email },
+    include: { outfit: true, guild: true },
+  })
 }
 
 /**
