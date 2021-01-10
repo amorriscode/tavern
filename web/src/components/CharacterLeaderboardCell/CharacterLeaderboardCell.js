@@ -52,11 +52,11 @@ export const Success = ({ topUsers }) => {
           {topUsers.map((user) => (
             <div key={user.id} className="grid grid-cols-3 text-xl py-4">
               <div
-                onClick={() => navigate(routes.user({ id: user.id }))}
+                onClick={() => {} /*(navigate(routes.user({ id: user.id })*/}
                 className="hover:text-brand-pink hover:cursor-pointer flex items-center"
               >
                 <Character
-                  id="me"
+                  id={user.name}
                   skin={user.outfit.skin}
                   size={25}
                   head={user.outfit.head}

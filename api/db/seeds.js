@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const problemRoot = '../src/problems'
 const extensionMap = { js: 'JAVASCRIPT' }
 const hash = require('object-hash')
+const faker = require('faker')
 
 dotenv.config()
 const db = new PrismaClient()
@@ -133,6 +134,97 @@ async function seedProblems() {
   }
 }
 
+async function seedUsers() {
+  await db.outfit.deleteMany({ where: {} })
+  await db.guild.deleteMany({ where: {} })
+  await db.user.deleteMany({ where: {} })
+
+  let title = await db.title.findFirst({ where: { name: 'Peasant' } })
+  let lastGuildId = null
+
+  for (let i = 0; i < 50; i++) {
+    let name = faker.name.firstName()
+    let email = faker.internet.email()
+    let level = Math.floor(Math.random() * 101)
+    let experience = Math.floor(Math.random() * 10001)
+    let outfit = randomOutfit()
+
+    let guild = undefined
+    if (Math.random() > 0.3) {
+      if (Math.random() > 0.3 && lastGuildId != null) {
+        guild = { connect: { id: lastGuildId } }
+      } else {
+        const tG = await db.guild.create({
+          data: {
+            name: faker.random.word(),
+            experience: Math.floor(Math.random() * 100001),
+          },
+        })
+
+        const problems = await db.problem.findMany()
+        const problem = problems[Math.floor(Math.random() * problems.length)]
+
+        await db.assignedProblem.create({
+          data: {
+            remaining: 20,
+            required: 20,
+            problem: {
+              connect: {
+                id: problem.id,
+              },
+            },
+            guild: {
+              connect: {
+                id: tG.id,
+              },
+            },
+          },
+        })
+
+        lastGuildId = tG.id
+        guild = { connect: { id: lastGuildId } }
+      }
+    }
+
+    let user = await db.user.create({
+      data: {
+        name,
+        email,
+        level,
+        title: { connect: { id: title.id } },
+        experience,
+        outfit: {
+          create: { ...outfit },
+        },
+        guild,
+      },
+    })
+
+    console.info(`created ${JSON.stringify(user)}`)
+    updated = true
+  }
+}
+
+function r(max) {
+  return Math.floor(Math.random() * max)
+}
+
+function randomOutfit() {
+  return {
+    skin: r(4),
+    head: r(2),
+    neck: 0,
+    body: r(4),
+    ears: r(2),
+    eyes: r(3),
+    nose: r(3),
+    mouth: r(3),
+    hair: r(4),
+    facial: r(8),
+    hairColour: r(7),
+  }
+}
+
 async function seedTitles() {
   const titles = [{ name: 'Peasant', unlockLevel: 1 }]
 
@@ -159,6 +251,8 @@ async function main() {
   await seedProblems()
 
   await seedTitles()
+
+  await seedUsers()
 
   if (!updated) {
     console.info('No data to seed.')

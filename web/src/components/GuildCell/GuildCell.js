@@ -73,13 +73,17 @@ export const Success = ({ guild }) => {
           </div>
 
           {activeQuests.length ? (
-            activeQuests.map((assignedProblem) => (
-              <ProblemCard
-                key={assignedProblem.problem.id}
-                problem={assignedProblem.problem}
-                assignedProblem={assignedProblem}
-              />
-            ))
+            <div className="space-y-4">
+              {activeQuests
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .map((assignedProblem) => (
+                  <ProblemCard
+                    key={assignedProblem.problem.id}
+                    problem={assignedProblem.problem}
+                    assignedProblem={assignedProblem}
+                  />
+                ))}
+            </div>
           ) : (
             <div>Come back tomorrow for a more quests!</div>
           )}
@@ -91,13 +95,15 @@ export const Success = ({ guild }) => {
               Solved Quests
             </h2>
 
-            {previousQuests.map((assignedProblem) => (
-              <ProblemCard
-                key={assignedProblem.problem.id}
-                problem={assignedProblem.problem}
-                assignedProblem={assignedProblem}
-              />
-            ))}
+            <div className="space-y-4">
+              {previousQuests.map((assignedProblem) => (
+                <ProblemCard
+                  key={assignedProblem.problem.id}
+                  problem={assignedProblem.problem}
+                  assignedProblem={assignedProblem}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
