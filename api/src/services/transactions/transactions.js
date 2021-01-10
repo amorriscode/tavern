@@ -18,12 +18,11 @@ export const transaction = ({ id }) => {
 export const createTransaction = async ({ input }) => {
   requireAuth()
 
-  const { delta } = input
+  const { delta, problem } = input
   const { currentUser } = context
-  const userGuild = await guild({ id: currentUser.guildId })
 
   const userExperience = currentUser.experience + delta
-  const guildExperience = userGuild.experience + delta
+  const guildExperience = currentUser.guild.experience + delta
 
   await updateUser({
     id: currentUser.id,
@@ -31,7 +30,7 @@ export const createTransaction = async ({ input }) => {
   })
 
   await updateGuild({
-    id: userGuild.id,
+    id: currentUser.guild.id,
     input: { experience: guildExperience },
   })
 
@@ -44,7 +43,10 @@ export const createTransaction = async ({ input }) => {
         connect: { id: currentUser.id },
       },
       guild: {
-        connect: { id: userGuild.id },
+        connect: { id: currentUser.guild.id },
+      },
+      problem: {
+        connect: { id: problem.id },
       },
     },
   })

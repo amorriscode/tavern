@@ -2,6 +2,7 @@ const { VM } = require('vm2')
 
 import { db } from 'src/lib/db'
 import { createTransaction } from 'src/services/transactions'
+import { solveAssignedProblem } from 'src/services/assignedProblems'
 
 const languageMap = {
   JAVASCRIPT: 'js',
@@ -96,6 +97,9 @@ export const submitProblem = async ({ id, body, language }) => {
             executionTime: new Date().getTime() - start,
             stacktrace: result.stacktrace,
             errorLogs: result.logs,
+            problem: {
+              connect: { id: problem.id },
+            },
           },
         })
 
@@ -115,18 +119,24 @@ export const submitProblem = async ({ id, body, language }) => {
         body,
         success: true,
         executionTime: new Date().getTime() - start,
+        problem: {
+          connect: { id: problem.id },
+        },
       },
     })
 
+    // Get delta and update user/guild experience
     const delta = await (
       await db.problem.findUnique({ where: { id } }).difficulty()
     ).experience
 
     if (delta) {
       await createTransaction({
-        input: { delta },
+        input: { delta, problem },
       })
     }
+
+    await solveAssignedProblem({ problem })
 
     return {
       problem,

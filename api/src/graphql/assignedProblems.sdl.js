@@ -6,6 +6,9 @@ export const schema = gql`
     guild: Guild
     guildId: String
     createdAt: DateTime!
+    required: Int
+    remaining: Int
+    solved: Boolean
   }
 
   type Query {
