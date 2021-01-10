@@ -1,0 +1,1 @@
+function fourSum(array, target) {}

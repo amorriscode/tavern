@@ -1,0 +1,18 @@
+{
+  "id": 6,
+  "name": "Four Sum",
+  "description": "Write a function that takes a non-empty array of distinct integers and an integer representing a target sum. The function should find all quadruplets in the input array sum up to the target sum and return an array of these quadruplets. If no two numbers sum up to the target sum, the function should return an empty array.",
+  "difficulty": "Hard",
+  "hints": [
+    "Use for loops",
+    "Using four for loops to calculate the sums of all possible quadruplets in the array would generate an algo that runs in O(n^4) times . Can you come up with something faster using fewer for loops?",
+    "You can calculate the sums of every pair of numbers in the array in O(n^2( time using just two for loops. then, assuming that you've stored all of these sums in a hash table, you can fairly easily find which two sums can be paired to add up to the target sum: the numbers summing up to these two sums constitute candidates for valid quadruplets; you just have to make sure that no number was  used to generate both of the two sums. "
+  ],
+  "sample": {
+    "input": "[7, 6, 4, -1, 1, 2], 16",
+    "output": "[[7, 6, 4, -1], [7, 6, 1, 2]] "
+  },
+  "entrypoints": {
+    "js": "fourSum($1, $2)"
+  }
+}
