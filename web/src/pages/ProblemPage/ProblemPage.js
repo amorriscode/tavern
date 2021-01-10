@@ -77,7 +77,7 @@ const ProblemPage = () => {
 
         <div
           className="w-3/5 overflow-hidden relative"
-          style={{ height: `calc(100vh - ${NAV_HEIGHT})` }}
+          style={{ height: `calc(100vh - ${navHeight})` }}
         >
           <MonacoEditor
             width="100%"
