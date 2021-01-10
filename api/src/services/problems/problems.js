@@ -49,7 +49,7 @@ const solveJavascript = ({ entrypoint, testCase, timeout, body }) => {
 
   let success = false
   if (result) {
-    for (var answer of output) {
+    for (let answer of output) {
       if (JSON.stringify(answer) === JSON.stringify(result)) {
         success = true
         break
@@ -71,7 +71,7 @@ export const submitProblem = async ({ id, body, language }) => {
   const testCases = await db.testCase.findMany({ where: { problemId: id } })
 
   if (language == 'JAVASCRIPT') {
-    var index = 0
+    let index = 0
     const start = new Date().getTime()
 
     for (const testCase of testCases) {
@@ -146,6 +146,7 @@ export const runProblem = ({ id, body, language }) => {
             logs: result.logs,
             error: result.stacktrace != null,
             stacktrace: result.stacktrace,
+            output: result.output,
           }
         }
       })

@@ -21,6 +21,7 @@ export const schema = gql`
     logs: [String]!
     error: Boolean
     stacktrace: String
+    output: String
   }
 
   type ProblemSubmitionResult {
