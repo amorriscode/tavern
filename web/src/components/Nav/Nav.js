@@ -10,7 +10,7 @@ const Nav = () => {
       </div>
 
       <div className="w-1/2 space-x-4 text-right pt-3">
-          <Link to={routes.home()}>Character Sheet</Link>
+          <Link to={routes.profile()}>Character Sheet</Link>
 
           <Link to={routes.home()}>Guild</Link>
 
