@@ -8,7 +8,7 @@ export const topUsers = () => {
   return db.user.findMany({
     orderBy: [
       {
-        level: 'desc',
+        experience: 'desc',
       },
     ],
     take: 50,
