@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import MonacoEditor from 'react-monaco-editor'
 
-import { NAV_HEIGHT, DIFFICULTY_COLORS } from 'src/constants'
+import { DIFFICULTY_COLORS } from 'src/constants'
 import { getNavHeight } from 'src/lib/nav'
 
 import AppLayout from 'src/layouts/AppLayout'
