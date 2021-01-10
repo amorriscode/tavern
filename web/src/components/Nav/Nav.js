@@ -54,7 +54,11 @@ const Nav = () => {
           Guild
         </NavLink>
 
-        <NavLink to={routes.leaderboard()} className="hover:text-brand-pink">
+        <NavLink
+          to={routes.leaderboard()}
+          className="hover:text-brand-pink"
+          activeClassName="text-brand-pink"
+        >
           Leaderboard
         </NavLink>
 
