@@ -1,5 +1,5 @@
 import AppLayout from 'src/layouts/AppLayout'
-
+import { useState } from 'react'
 import Head1 from 'src/character-creation/heads/head1.svg'
 import Head2 from 'src/character-creation/heads/head2.svg'
 import Body1 from 'src/character-creation/bodies/body1.svg'
@@ -34,6 +34,14 @@ import Nose3 from 'src/character-creation/noses/nose3.svg'
 import Glasses1 from 'src/character-creation/glasses/glasses1.svg'
 import EmptySlot from 'src/character-creation/none.svg'
 
+function nextInArray(i, array) {
+  const out = i + 1
+  if (out > array.length - 1) {
+    return 0
+  }
+  return out
+}
+
 const characterChoices = {
   bodies: [Body1, Body2, Body3, Body4],
   ears: [Ears1, Ears2],
@@ -48,7 +56,7 @@ const characterChoices = {
     HairFront4,
     HairFront5,
     EmptySlot,
-    HairFront2,
+    EmptySlot,
   ],
   hairBack: [
     EmptySlot,
@@ -58,13 +66,24 @@ const characterChoices = {
     HairBack4,
     HairBack5,
     HairBack6,
-    EmptySlot,
+    HairBack2,
   ],
   hats: [EmptySlot, Hat1],
   heads: [Head1, Head2],
   mouths: [Mouth1, Mouth2, Mouth3],
   necks: [Neck1],
   noses: [Nose1, Nose2, Nose3],
+  skinColours: ['#eac5a4', '#875e42', '#ffc197', '#6d4430'],
+  skin2Colours: ['#d37762', '#5e382f', '#e28f7f', '#603126'],
+  hairColours: [
+    '#c7ea47',
+    '#3d2a33',
+    '#3a5260',
+    '#5e142d',
+    '#f7643c',
+    '#b2a4a1',
+    '#f9ea80',
+  ],
 }
 
 const ProfilePage = () => {
@@ -81,38 +100,117 @@ const ProfilePage = () => {
 
     characterDesign: {
       head: 0,
-      body: 2,
+      body: 0,
       ears: 0,
-      facial: 2,
-      hair: 4,
+      facial: 0,
+      hair: 0,
       hat: 0,
-      nose: 2,
+      nose: 0,
       mouth: 0,
       neck: 0,
       glasses: 0,
-      eyes: 1,
+      eyes: 0,
     },
 
     characterColours: {
-      skin: '#eac5a4',
-      skin2: '#d37762',
-      hair: '#c7ea47',
-      hair2: '#c7ea47',
+      skin: 0,
+      hair: 0,
     },
   }
 
-  const Head = characterChoices.heads[user.characterDesign.head]
-  const HairBack = characterChoices.hairBack[user.characterDesign.hair]
-  const HairFront = characterChoices.hairFront[user.characterDesign.hair]
+  const [skinIndex, setSkinIndex] = useState(user.characterColours.skin)
+  const [headIndex, setHeadIndex] = useState(user.characterDesign.head)
+  const [hairColourIndex, setHairColourIndex] = useState(
+    user.characterColours.hair
+  )
+  const [hairIndex, setHairIndex] = useState(user.characterDesign.hair)
+  const [eyeIndex, setEyeIndex] = useState(user.characterDesign.eyes)
+  const [bodyIndex, setBodyIndex] = useState(user.characterDesign.body)
+  const [facialIndex, setFacialIndex] = useState(user.characterDesign.facial)
+  const [earIndex, setEarIndex] = useState(user.characterDesign.ears)
+  const [noseIndex, setNoseIndex] = useState(user.characterDesign.nose)
+  const [glassesIndex, setGlassesIndex] = useState(user.characterDesign.glasses)
+  const [mouthIndex, setMouthIndex] = useState(user.characterDesign.mouth)
+  const [hatIndex, setHatIndex] = useState(user.characterDesign.hat)
+
+  const hairColour = characterChoices.hairColours[hairColourIndex]
+  const skinColour = characterChoices.skinColours[skinIndex]
+  const skin2Colour = characterChoices.skin2Colours[skinIndex]
+  const Head = characterChoices.heads[headIndex]
+  const HairBack = characterChoices.hairBack[hairIndex]
+  const HairFront = characterChoices.hairFront[hairIndex]
   const Neck = characterChoices.necks[0]
-  const Body = characterChoices.bodies[user.characterDesign.body]
-  const Ears = characterChoices.ears[user.characterDesign.ears]
-  const Eyes = characterChoices.eyes[user.characterDesign.eyes]
-  const Facial = characterChoices.facial[user.characterDesign.facial]
-  const Nose = characterChoices.noses[user.characterDesign.nose]
-  const Glasses = characterChoices.glasses[user.characterDesign.glasses]
-  const Mouth = characterChoices.mouths[user.characterDesign.mouth]
-  const Hat = characterChoices.hats[user.characterDesign.hat]
+  const Body = characterChoices.bodies[bodyIndex]
+  const Ears = characterChoices.ears[earIndex]
+  const Eyes = characterChoices.eyes[eyeIndex]
+  const Facial = characterChoices.facial[facialIndex]
+  const Nose = characterChoices.noses[noseIndex]
+  const Glasses = characterChoices.glasses[glassesIndex]
+  const Mouth = characterChoices.mouths[mouthIndex]
+  const Hat = characterChoices.hats[hatIndex]
+
+  const handleSkinChange = () => {
+    let newSkinIndex = nextInArray(skinIndex, characterChoices.skinColours)
+    setSkinIndex(newSkinIndex)
+  }
+
+  const handleHairColourChange = () => {
+    let newHairColourIndex = nextInArray(
+      hairColourIndex,
+      characterChoices.hairColours
+    )
+    setHairColourIndex(newHairColourIndex)
+  }
+
+  const handleHeadChange = () => {
+    let newHeadIndex = nextInArray(headIndex, characterChoices.heads)
+    setHeadIndex(newHeadIndex)
+  }
+
+  const handleHairChange = () => {
+    let newHairIndex = nextInArray(hairIndex, characterChoices.hairFront)
+    setHairIndex(newHairIndex)
+  }
+
+  const handleEyeChange = () => {
+    let newEyeIndex = nextInArray(eyeIndex, characterChoices.eyes)
+    setEyeIndex(newEyeIndex)
+  }
+
+  const handleBodyChange = () => {
+    let newBodyIndex = nextInArray(bodyIndex, characterChoices.bodies)
+    setBodyIndex(newBodyIndex)
+  }
+
+  const handleFacialChange = () => {
+    let newFacialIndex = nextInArray(facialIndex, characterChoices.facial)
+    setFacialIndex(newFacialIndex)
+  }
+
+  const handleEarChange = () => {
+    let newEarIndex = nextInArray(earIndex, characterChoices.ears)
+    setEarIndex(newEarIndex)
+  }
+
+  const handleNoseChange = () => {
+    let newNoseIndex = nextInArray(noseIndex, characterChoices.noses)
+    setNoseIndex(newNoseIndex)
+  }
+
+  const handleGlassesChange = () => {
+    let newGlassesIndex = nextInArray(glassesIndex, characterChoices.glasses)
+    setGlassesIndex(newGlassesIndex)
+  }
+
+  const handleMouthChange = () => {
+    let newMouthIndex = nextInArray(mouthIndex, characterChoices.mouths)
+    setMouthIndex(newMouthIndex)
+  }
+
+  const handleHatChange = () => {
+    let newHatIndex = nextInArray(hatIndex, characterChoices.hats)
+    setHatIndex(newHatIndex)
+  }
 
   return (
     <AppLayout>
@@ -134,14 +232,13 @@ const ProfilePage = () => {
           <Ears id="skin" className="absolute w-48 mt-24"></Ears>
 
           <Eyes id="eyes" className="absolute w-44 mt-4 pt-1"></Eyes>
+          <Mouth id="skin2" className="absolute w-44 pt-3 mt-6"></Mouth>
           <Facial id="hair" className="absolute w-52 mt-3"></Facial>
           <Nose id="skin2" className="absolute w-48 mt-2 pt-2"></Nose>
 
           <Glasses id="glasses" className="absolute w-36 mt-24"></Glasses>
 
           <HairFront id="hair" className="absolute w-56 mt-3"></HairFront>
-
-          <Mouth id="skin2" className="absolute w-44 pt-3 mt-6"></Mouth>
 
           <Hat id="hat" className="absolute w-56 pt-1 -mt-20"></Hat>
         </div>
@@ -156,7 +253,7 @@ const ProfilePage = () => {
 
               #hair .cls-1 {
                 stroke: none;
-                fill: ${user.characterColours.hair};
+                fill: ${hairColour};
               }
 
               #hat .cls-2 .cls-1 .cls-3 {
@@ -166,17 +263,17 @@ const ProfilePage = () => {
 
               #hairBack .cls-1 {
                 stroke: none;
-                fill: ${user.characterColours.hair2};
+                fill: ${hairColour};
               }
 
               #skin .cls-1 {
                 stroke: none;
-                fill: ${user.characterColours.skin};
+                fill: ${skinColour};
               }
 
               #skin2 .cls-1 {
                 stroke: none;
-                fill: ${user.characterColours.skin2};
+                fill: ${skin2Colour};
               }
 
               #eyes .cls-1 {
@@ -202,6 +299,29 @@ const ProfilePage = () => {
         </p>
         <p>Guild: {user?.guild}</p>
         <p>Challenges Completed: {user?.completed}</p>
+        <button onClick={handleSkinChange}>Change skin</button>
+        <br></br>
+        <button onClick={handleHeadChange}>Change head</button>
+        <br></br>
+        <button onClick={handleHairChange}>Change hair</button>
+        <br></br>
+        <button onClick={handleHairColourChange}>Change hair colour</button>
+        <br></br>
+        <button onClick={handleEyeChange}>Change eyes</button>
+        <br></br>
+        <button onClick={handleBodyChange}>Change body</button>
+        <br></br>
+        <button onClick={handleFacialChange}>Change facial hair</button>
+        <br></br>
+        <button onClick={handleEarChange}>Change ears</button>
+        <br></br>
+        <button onClick={handleNoseChange}>Change nose</button>
+        <br></br>
+        <button onClick={handleGlassesChange}>Change glasses</button>
+        <br></br>
+        <button onClick={handleMouthChange}>Change mouth</button>
+        <br></br>
+        <button onClick={handleHatChange}>Change hat</button>
       </div>
     </AppLayout>
   )
