@@ -12,11 +12,7 @@ export const QUERY = gql`
       users {
         id
         name
-        level
-        title {
-          id
-          name
-        }
+        experience
       }
       assignedProblems {
         problem {
@@ -44,9 +40,11 @@ export const Success = ({ guild }) => {
 
   return (
     <div className="container mx-auto mt-8 grid grid-cols-4 gap-8">
-      <h1 className="font-extrabold text-4xl text-gray-900 mb-8 col-span-2 col-start-2 row-span-1">
-        {guild.name}
-      </h1>
+      <div className="text-gray-900 mb-8 col-span-2 col-start-2 row-span-1 flex justify-between items-center">
+        <h1 className="font-extrabold text-4xl">{guild.name}</h1>
+
+        <div className="text-2xl font-extrabold">{guild.experience} XP</div>
+      </div>
 
       <div className="space-y-12 col-span-2 col-start-2">
         <div>

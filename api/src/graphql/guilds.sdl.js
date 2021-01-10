@@ -22,6 +22,7 @@ export const schema = gql`
 
   input UpdateGuildInput {
     name: String
+    experience: Int
   }
 
   type Mutation {

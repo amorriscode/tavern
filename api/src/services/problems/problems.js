@@ -1,5 +1,7 @@
-import { db } from 'src/lib/db'
 const { VM } = require('vm2')
+
+import { db } from 'src/lib/db'
+import { createTransaction } from 'src/services/transactions'
 
 const languageMap = {
   JAVASCRIPT: 'js',
@@ -115,6 +117,16 @@ export const submitProblem = async ({ id, body, language }) => {
         executionTime: new Date().getTime() - start,
       },
     })
+
+    const delta = await (
+      await db.problem.findUnique({ where: { id } }).difficulty()
+    ).experience
+
+    if (delta) {
+      await createTransaction({
+        input: { delta },
+      })
+    }
 
     return {
       problem,

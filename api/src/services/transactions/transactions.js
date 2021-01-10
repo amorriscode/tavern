@@ -1,4 +1,9 @@
+import { context } from '@redwoodjs/api'
+
 import { db } from 'src/lib/db'
+import { requireAuth } from 'src/lib/auth'
+import { updateUser } from 'src/services/users'
+import { guild, updateGuild } from 'src/services/guilds'
 
 export const transactions = () => {
   return db.transaction.findMany()
@@ -10,9 +15,38 @@ export const transaction = ({ id }) => {
   })
 }
 
-export const createTransaction = ({ input }) => {
+export const createTransaction = async ({ input }) => {
+  requireAuth()
+
+  const { delta } = input
+  const { currentUser } = context
+  const userGuild = await guild({ id: currentUser.guildId })
+
+  const userExperience = currentUser.experience + delta
+  const guildExperience = userGuild.experience + delta
+
+  await updateUser({
+    id: currentUser.id,
+    input: { experience: userExperience },
+  })
+
+  await updateGuild({
+    id: userGuild.id,
+    input: { experience: guildExperience },
+  })
+
   return db.transaction.create({
-    data: input,
+    data: {
+      delta,
+      userExperience,
+      guildExperience,
+      user: {
+        connect: { id: currentUser.id },
+      },
+      guild: {
+        connect: { id: userGuild.id },
+      },
+    },
   })
 }
 
