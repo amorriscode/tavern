@@ -16,7 +16,6 @@ export const topUsers = () => {
 }
 
 export const user = ({ id }) => {
-  console.log(id)
   return db.user.findUnique({
     where: { id },
   })
@@ -54,4 +53,6 @@ export const User = {
     db.user.findUnique({ where: { id: root.id } }).guild(),
   title: (_obj, { root }) =>
     db.user.findUnique({ where: { id: root.id } }).title(),
+  outfit: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).outfit(),
 }

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import * as outfits from 'src/character-creation'
 import { useMutation } from '@redwoodjs/web'
 import { useAuth } from '@redwoodjs/auth'
+import { navigate, routes } from '@redwoodjs/router'
 
 const SET_OUTFIT = gql`
   mutation Outfits_SetOutfit($outfit: CreateOutfitInput!) {
@@ -15,7 +16,7 @@ const RandomCharacter = () => {
   const [setOutfit] = useMutation(SET_OUTFIT, {
     onCompleted: () =>
       reauthenticate().then((_) => {
-        alert('done')
+        navigate(routes.guild())
       }),
   })
 

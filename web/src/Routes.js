@@ -10,6 +10,7 @@ const Routes = () => {
         <Route path="/finish" page={FinishPage} name="finish" />
         <Route path="/guild/create" page={CreateGuildPage} name="createGuild" />
         <Route path="/guild/{id}" page={GuildPage} name="guild" />
+        <Route path="/guild" page={GuildRedirectPage} name="guildRedirect" />
         <Route path="/problem/{id:Int}" page={ProblemPage} name="problem" />
       </Private>
 
