@@ -2,7 +2,7 @@ datasource DS {
   // optionally set multiple providers
   // example: provider = ["sqlite", "postgresql"]
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -38,7 +38,7 @@ model Scaffold {
 }
 
 model Problem {
-  id             Int        @id
+  id             Int        @id @default(autoincrement())
   name           String
   description    String
   difficulty     Difficulty @relation(fields: [difficultyName], references: [name])
@@ -47,6 +47,5 @@ model Problem {
   sampleInput    String
   sampleOutput   String
   testCases      TestCase[]
-  scaffolds      Scaffold[]
-  checksum       String?
+  scaffold       Scaffold[]
 }
