@@ -12,6 +12,9 @@ export const topUsers = () => {
       },
     ],
     take: 50,
+    include: {
+      outfit: true,
+    },
   })
 }
 
