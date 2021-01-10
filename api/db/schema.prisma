@@ -74,13 +74,32 @@ model Transaction {
 
 model User {
   id      String  @id @default(uuid())
-  name    String
+  name    String?
   email   String  @unique
   guild   Guild?  @relation(fields: [guildId], references: [id])
   guildId String?
   level   Int
   title   Title   @relation(fields: [titleId], references: [id])
   titleId String
+  outfit  Outfit?
+}
+
+model Outfit {
+  id         String @id @default(uuid())
+  user       User   @relation(fields: [userId], references: [id])
+  userId     String
+  head       Int
+  ears       Int
+  eyes       Int
+  body       Int
+  facial     Int?
+  hair       Int?
+  hat        Int?
+  mouth      Int
+  neck       Int
+  nose       Int
+  skin       Int
+  hairColour Int
 }
 
 model Title {

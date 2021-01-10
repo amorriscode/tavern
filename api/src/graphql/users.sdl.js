@@ -1,12 +1,13 @@
 export const schema = gql`
   type User {
     id: String!
-    name: String!
+    name: String
     email: String!
     guildId: String
     level: Int!
     title: Title!
     titleId: String!
+    outfit: Outfit
   }
 
   type Query {
@@ -15,7 +16,7 @@ export const schema = gql`
   }
 
   input CreateUserInput {
-    name: String!
+    name: String
     email: String!
   }
 

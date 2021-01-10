@@ -11,7 +11,7 @@ export const getCurrentUser = async (decoded, { token }) => {
     issuer,
   } = await mAdmin.users.getMetadataByToken(token)
 
-  return db.user.findUnique({ where: { email } })
+  return db.user.findUnique({ where: { email }, include: { outfit: true } })
 }
 
 /**
