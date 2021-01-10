@@ -16,9 +16,12 @@
     "@redwoodjs/forms": "^0.22.1",
     "@redwoodjs/router": "^0.22.1",
     "@redwoodjs/web": "^0.22.1",
+    "monaco-editor-webpack-plugin": "^2.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0",
+    "react-monaco-editor": "^0.41.2"
   },
   "devDependencies": {
     "autoprefixer": "9.8.6",

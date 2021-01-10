@@ -22,7 +22,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      cursor: ['hover'],
+      margin: ['last'],
+    },
   },
   plugins: [],
 }
