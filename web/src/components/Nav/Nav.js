@@ -1,10 +1,5 @@
 import { NavLink, routes } from '@redwoodjs/router'
 
-import GuildIcon from 'src/navbar-icons/guild.svg'
-import LeaderboardIcon from 'src/navbar-icons/leaderboard.svg'
-import ProfileIcon from 'src/navbar-icons/profile.svg'
-import SettingsIcon from 'src/navbar-icons/settings.svg'
-
 import Logo from 'src/components/Logo'
 import AuthModal from 'src/components/AuthModal'
 import { useAuth } from '@redwoodjs/auth'
