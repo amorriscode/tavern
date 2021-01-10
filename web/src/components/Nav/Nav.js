@@ -1,5 +1,10 @@
 import { Link, routes } from '@redwoodjs/router'
 
+import GuildIcon from 'src/navbar-icons/guild.svg'
+import LeaderboardIcon from 'src/navbar-icons/leaderboard.svg'
+import ProfileIcon from 'src/navbar-icons/profile.svg'
+import SettingsIcon from 'src/navbar-icons/settings.svg'
+
 import Logo from 'src/components/Logo'
 import AuthModal from 'src/components/AuthModal'
 import { useAuth } from '@redwoodjs/auth'
@@ -41,8 +46,14 @@ const Nav = () => {
       </div>
 
       <div className="w-1/2 space-x-4 flex justify-end items-center">
+        <Link to={routes.home()}>
+          <GuildIcon className="w-8"></GuildIcon>
+        </Link>
         <Link to={routes.home()}>Guild</Link>
 
+        <Link to={routes.leaderboard()}>
+          <LeaderboardIcon className="w-8"></LeaderboardIcon>
+        </Link>
         <Link to={routes.leaderboard()}>Leaderboard</Link>
 
         {profilePicture}
