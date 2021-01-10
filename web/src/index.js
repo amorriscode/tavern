@@ -9,8 +9,6 @@ import Routes from 'src/Routes'
 
 import './index.css'
 
-
-
 const m = new Magic(process.env.MAGICLINK_PUBLIC)
 
 ReactDOM.render(
