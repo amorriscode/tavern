@@ -48,4 +48,44 @@ model Problem {
   sampleOutput   String
   testCases      TestCase[]
   scaffolds      Scaffold[]
+  checksum       String?
+}
+
+model Guild {
+  id          String        @id @default(uuid())
+  name        String
+  experience  Int           @default(0)
+  createdAt   DateTime      @default(now())
+  Transaction Transaction[]
+  users       User[]
+}
+
+// experience transactions
+model Transaction {
+  id      String   @id @default(uuid())
+  guild   Guild?   @relation(fields: [guildId], references: [id])
+  guildId String?
+  delta   Int
+  result  Int // total experience after delta
+  time    DateTime @default(now())
+  // todo: user id
+  // transactions can exist for both users + guilds
+}
+
+model User {
+  id      String  @id @default(uuid())
+  name    String
+  email   String  @unique
+  guild   Guild?  @relation(fields: [guildId], references: [id])
+  guildId String?
+  level   Int
+  title   Title   @relation(fields: [titleId], references: [id])
+  titleId String
+}
+
+model Title {
+  id          String @id @default(uuid())
+  name        String
+  users       User[]
+  unlockLevel Int
 }

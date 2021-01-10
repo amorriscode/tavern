@@ -128,6 +128,14 @@ async function seedProblems() {
   }
 }
 
+async function seedTitles() {
+  const titles = [{ name: 'Peasant', unlockLevel: 1 }]
+
+  for (const title of titles) {
+    await db.title.create({ data: title })
+  }
+}
+
 async function main() {
   // Seed data is database data that needs to exist for your app to run.
   // Ideally this file should be idempotent: running it multiple times
@@ -139,12 +147,13 @@ async function main() {
   //     await db.user.create({ data: { name: 'Admin', email: 'admin@email.com' }})
   //   }
 
-  // todo: use constants.js?
   await createOrUpdateDifficulty('Easy', '#52fd74', 'An easy challenge.')
   await createOrUpdateDifficulty('Medium', '#fdd852', 'A medium challenge.')
   await createOrUpdateDifficulty('Hard', '#fd5251', 'A hard challenge.')
 
   await seedProblems()
+
+  await seedTitles()
 
   if (!updated) {
     console.info('No data to seed.')
