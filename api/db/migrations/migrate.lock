@@ -1,0 +1,10 @@
+# Prisma Migrate lockfile v1
+
+20210109223824-create-algo-models
+20210109223846-create-algo-models
+20210109230008-change-difficulty-id-type
+20210109231018-add-scaffold-and-language
+20210110000339-change-scaffold-id-to-string
+20210110001404-rename-scaffold-field-in-problem
+20210110002843-remove-autoincrement-from-problem-id
+20210110010025-add-checksum-to-problem

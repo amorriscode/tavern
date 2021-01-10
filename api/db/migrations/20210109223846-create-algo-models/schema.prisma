@@ -1,0 +1,38 @@
+datasource DS {
+  // optionally set multiple providers
+  // example: provider = ["sqlite", "postgresql"]
+  provider = "postgresql"
+  url = "***"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+model Difficulty {
+  id Int @id @default(autoincrement())
+  name String
+  color String
+  description String
+}
+
+model TestCase {
+  id Int @id @default(autoincrement())
+  problem Problem @relation(fields: [problemId], references: [id])
+  problemId Int
+  input String
+  output String
+}
+
+model Problem {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  difficulty Difficulty @relation(fields: [difficultyId], references: [id])
+  difficultyId Int
+  hints String[]
+  sampleInput String
+  sampleOutput String
+  testCases TestCase[]
+}
