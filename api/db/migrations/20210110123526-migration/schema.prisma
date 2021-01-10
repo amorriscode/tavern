@@ -2,7 +2,7 @@ datasource DS {
   // optionally set multiple providers
   // example: provider = ["sqlite", "postgresql"]
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -88,28 +88,25 @@ model AssignedProblem {
 
 // experience transactions
 model Transaction {
-  id              String   @id @default(uuid())
-  guild           Guild?   @relation(fields: [guildId], references: [id])
-  guildId         String?
-  delta           Int
-  userExperience  Int // total user experience after delta
-  guildExperience Int // total guild experience after delta
-  time            DateTime @default(now())
-  user            User?    @relation(fields: [userId], references: [id])
-  userId          String?
+  id      String   @id @default(uuid())
+  guild   Guild?   @relation(fields: [guildId], references: [id])
+  guildId String?
+  delta   Int
+  result  Int // total experience after delta
+  time    DateTime @default(now())
+  // todo: user id
+  // transactions can exist for both users + guilds
 }
 
 model User {
-  id          String        @id @default(uuid())
-  name        String
-  email       String        @unique
-  guild       Guild?        @relation(fields: [guildId], references: [id])
-  guildId     String?
-  level       Int
-  title       Title         @relation(fields: [titleId], references: [id])
-  titleId     String
-  transaction Transaction[]
-  experience  Int           @default(0)
+  id      String  @id @default(uuid())
+  name    String
+  email   String  @unique
+  guild   Guild?  @relation(fields: [guildId], references: [id])
+  guildId String?
+  level   Int
+  title   Title   @relation(fields: [titleId], references: [id])
+  titleId String
 }
 
 model Title {

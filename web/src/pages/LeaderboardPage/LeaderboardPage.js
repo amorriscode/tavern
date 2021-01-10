@@ -5,7 +5,7 @@ import CharacterLeaderboardCell from 'src/components/CharacterLeaderboardCell'
 const LeaderboardPage = () => {
   return (
     <AppLayout>
-      <div className="grid grid-cols-2 gap-8 container mx-auto mt-8">
+      <div className="grid grid-cols-2 gap-12 container mx-auto mt-8">
         <GuildLeaderboardCell />
         <CharacterLeaderboardCell />
       </div>

@@ -8,6 +8,7 @@ export const schema = gql`
     level: Int!
     title: Title!
     titleId: String!
+    experience: Int!
   }
 
   type Query {
@@ -24,6 +25,7 @@ export const schema = gql`
   input UpdateUserInput {
     name: String
     email: String
+    experience: Int
   }
 
   type Mutation {

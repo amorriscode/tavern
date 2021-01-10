@@ -8,15 +8,17 @@ const hash = require('object-hash')
 
 dotenv.config()
 const db = new PrismaClient()
-var updated = false
+let updated = false
 
-async function createOrUpdateDifficulty(name, color, description) {
+async function createOrUpdateDifficulty(name, color, description, experience) {
   const difficulty = await db.difficulty.findUnique({ where: { name } })
   if (!difficulty) {
     console.info(
-      `Creating new difficulty: { ${name}, ${color}, ${description} }.`
+      `Creating new difficulty: { ${name}, ${color}, ${description}, ${experience} }.`
     )
-    await db.difficulty.create({ data: { name, color, description } })
+    await db.difficulty.create({
+      data: { name, color, description, experience },
+    })
     updated = true
   } else {
     if (difficulty.color !== color) {
@@ -31,7 +33,7 @@ async function createOrUpdateDifficulty(name, color, description) {
 
     await db.difficulty.update({
       where: { name },
-      data: { color, description },
+      data: { color, description, experience },
     })
   }
 }
@@ -150,9 +152,9 @@ async function main() {
   //     await db.user.create({ data: { name: 'Admin', email: 'admin@email.com' }})
   //   }
 
-  await createOrUpdateDifficulty('Easy', '#52fd74', 'An easy challenge.')
-  await createOrUpdateDifficulty('Medium', '#fdd852', 'A medium challenge.')
-  await createOrUpdateDifficulty('Hard', '#fd5251', 'A hard challenge.')
+  await createOrUpdateDifficulty('Easy', '#52fd74', 'An easy challenge.', 5)
+  await createOrUpdateDifficulty('Medium', '#fdd852', 'A medium challenge.', 10)
+  await createOrUpdateDifficulty('Hard', '#fd5251', 'A hard challenge.', 15)
 
   await seedProblems()
 
