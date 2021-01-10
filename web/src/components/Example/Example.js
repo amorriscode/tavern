@@ -5,12 +5,12 @@ const Example = ({ input, output }) => {
 
       <div className="mb-4">
         <h3 className="font-bold mb-1">Input</h3>
-        <p className="rounded bg-gray-200 p-4 w-full">{input}</p>
+        <p className="rounded-sm bg-gray-200 p-4 w-full">{input}</p>
       </div>
 
       <div>
         <h3 className="font-bold mb-1">Output</h3>
-        <p className="rounded bg-gray-200 p-4 w-full">{output}</p>
+        <p className="rounded-sm bg-gray-200 p-4 w-full">{output}</p>
       </div>
     </div>
   )

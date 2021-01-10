@@ -10,18 +10,18 @@ const Console = () => {
 
       <div className="flex justify-between items-center border-t-2 px-8 py-4">
         <div
-          className="p-2 hover:bg-gray-200 rounded"
+          className="p-2 hover:bg-gray-200 rounded-sm"
           onClick={() => setDisplayConsole(!displayConsole)}
         >
           <RiTerminalLine className="text-2xl text-gray-400 hover:text-gray-800 hover:cursor-pointer" />
         </div>
 
         <div className="space-x-2">
-          <button className="px-3 py-1 bg-gray-300 hover:bg-opacity-75 rounded">
+          <button className="px-3 py-1 bg-gray-300 hover:bg-opacity-75 rounded-sm">
             Run
           </button>
 
-          <button className="bg-gray-800 hover:bg-opacity-75 text-white px-3 py-1 rounded">
+          <button className="bg-brand-purple hover:bg-opacity-75 text-white px-3 py-1 rounded-sm">
             Submit
           </button>
         </div>
