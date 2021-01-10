@@ -8,7 +8,7 @@ export const guilds = () => {
 }
 
 export const guild = ({ id }) => {
-  return db.guild.findOne({
+  return db.guild.findUnique({
     where: { id },
   })
 }
@@ -45,8 +45,10 @@ export const deleteGuild = ({ id }) => {
 }
 
 export const Guild = {
-  Transaction: (_obj, { root }) =>
-    db.guild.findOne({ where: { id: root.id } }).Transaction(),
+  transactions: (_obj, { root }) =>
+    db.guild.findUnique({ where: { id: root.id } }).transactions(),
   users: (_obj, { root }) =>
-    db.guild.findOne({ where: { id: root.id } }).users(),
+    db.guild.findUnique({ where: { id: root.id } }).users(),
+  assignedProblems: (_obj, { root }) =>
+    db.guild.findUnique({ where: { id: root.id } }).assignedProblems(),
 }

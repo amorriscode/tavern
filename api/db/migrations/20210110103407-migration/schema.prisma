@@ -18,11 +18,12 @@ model Difficulty {
 }
 
 model TestCase {
-  id        Int     @id @default(autoincrement())
-  problem   Problem @relation(fields: [problemId], references: [id])
+  id        Int        @id @default(autoincrement())
+  problem   Problem    @relation(fields: [problemId], references: [id])
   problemId Int
   input     String
   output    String
+  Solution  Solution[]
 }
 
 enum Language {
@@ -38,18 +39,19 @@ model Scaffold {
 }
 
 model Problem {
-  id             Int        @id
-  name           String
-  description    String
-  difficulty     Difficulty @relation(fields: [difficultyName], references: [name])
-  difficultyName String
-  hints          String[]
-  sampleInput    String
-  sampleOutput   String
-  testCases      TestCase[]
-  scaffolds      Scaffold[]
-  checksum       String?
-  entrypoints    Json?
+  id               Int               @id
+  name             String
+  description      String
+  difficulty       Difficulty        @relation(fields: [difficultyName], references: [name])
+  difficultyName   String
+  hints            String[]
+  sampleInput      String
+  sampleOutput     String
+  testCases        TestCase[]
+  scaffolds        Scaffold[]
+  checksum         String?
+  entrypoints      Json?
+  assignedProblems AssignedProblem[]
 }
 
 model Solution {
@@ -65,12 +67,22 @@ model Solution {
 }
 
 model Guild {
-  id          String        @id @default(uuid())
-  name        String
-  experience  Int           @default(0)
-  createdAt   DateTime      @default(now())
-  Transaction Transaction[]
-  users       User[]
+  id               String            @id @default(uuid())
+  name             String
+  experience       Int               @default(0)
+  createdAt        DateTime          @default(now())
+  transactions     Transaction[]
+  users            User[]
+  assignedProblems AssignedProblem[]
+}
+
+model AssignedProblem {
+  id        String   @id @default(uuid())
+  problem   Problem  @relation(fields: [problemId], references: [id])
+  problemId Int
+  guild     Guild?   @relation(fields: [guildId], references: [id])
+  guildId   String?
+  createdAt DateTime @default(now())
 }
 
 // experience transactions

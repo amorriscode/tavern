@@ -188,6 +188,13 @@
       "arity": "Required"
     },
     {
+      "tag": "CreateField",
+      "model": "TestCase",
+      "field": "Solution",
+      "type": "Solution",
+      "arity": "List"
+    },
+    {
       "tag": "CreateModel",
       "model": "Scaffold"
     },
@@ -413,6 +420,13 @@
       "field": "entrypoints",
       "type": "Json",
       "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Problem",
+      "field": "assignedProblems",
+      "type": "AssignedProblem",
+      "arity": "List"
     },
     {
       "tag": "CreateModel",
@@ -677,7 +691,7 @@
     {
       "tag": "CreateField",
       "model": "Guild",
-      "field": "Transaction",
+      "field": "transactions",
       "type": "Transaction",
       "arity": "List"
     },
@@ -687,6 +701,198 @@
       "field": "users",
       "type": "User",
       "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Guild",
+      "field": "assignedProblems",
+      "type": "AssignedProblem",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "AssignedProblem"
+    },
+    {
+      "tag": "CreateField",
+      "model": "AssignedProblem",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "uuid()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "AssignedProblem",
+      "field": "problem",
+      "type": "Problem",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "problem"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "problem"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[problemId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "problem"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "AssignedProblem",
+      "field": "problemId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "AssignedProblem",
+      "field": "guild",
+      "type": "Guild",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "guild"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "guild"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[guildId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "guild"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "AssignedProblem",
+      "field": "guildId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "AssignedProblem",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "AssignedProblem",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
     },
     {
       "tag": "CreateModel",

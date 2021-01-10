@@ -26,7 +26,7 @@ const AuthModal = () => {
     <>
       <div
         onClick={handleAuth}
-        className="rounded px-3 py-1 bg-brand-purple text-brand-white hover:bg-opacity-75 hover:cursor-pointer"
+        className="rounded-sm px-3 py-1 bg-brand-purple text-brand-white hover:bg-opacity-75 hover:cursor-pointer"
       >
         {isAuthenticated ? 'Log Out' : 'Log In'}
       </div>

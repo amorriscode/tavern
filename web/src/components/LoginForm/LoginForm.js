@@ -28,12 +28,12 @@ const LoginForm = ({ onChangeForm, onAuthentication }) => {
             placeholder="mj@gmail.com"
             required
             onChange={(e) => setEmail(e.target.value)}
-            className="border rounded border-brand-purple bg-brand-white p-2 pl-10 w-full focus:border-brand-pink"
+            className="border rounded-sm border-brand-purple bg-brand-white p-2 pl-10 w-full focus:border-brand-pink"
           />
         </div>
 
         <button
-          className=" bg-brand-purple text-brand-white hover:bg-opacity-75 hover:cursor-pointer w-full mt-2 py-2 rounded justify-center"
+          className=" bg-brand-purple text-brand-white hover:bg-opacity-75 hover:cursor-pointer w-full mt-2 py-2 rounded-sm justify-center"
           disabled={!email.length}
           onClick={async () => {
             await logIn({ email, showUI: true })

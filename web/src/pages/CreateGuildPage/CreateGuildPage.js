@@ -15,11 +15,11 @@ const CREATE_GUILD = gql`
 `
 
 const CreateGuildPage = () => {
-  const [users, setUsers] = useState(['aa'])
+  const [users, setUsers] = useState([])
   const [email, setEmail] = useState('')
   const [createGuild] = useMutation(CREATE_GUILD, {
-    onCompleted: (data) => {
-      navigate(routes.home())
+    onCompleted: ({ createGuild: { id } }) => {
+      navigate(routes.guild({ id }))
     },
   })
 
@@ -43,19 +43,27 @@ const CreateGuildPage = () => {
   return (
     <AppLayout>
       <div className="container mx-auto mt-8">
-        <h1 className="font-extrabold text-4xl text-gray-900 mb-2">
-          Create your guild!
-        </h1>
+        <div className="mb-4 w-1/2 mx-auto">
+          <h1 className="font-extrabold text-4xl text-gray-900 mb-1">
+            Create your guild!
+          </h1>
+
+          <p>
+            An adventurer should never have to face dungeons, dragons, or quests
+            alone. Invite your friends to tackle algorithms collectively.
+          </p>
+        </div>
+
         <Form
           onSubmit={onSubmit}
-          className="space-y-4 bg-white rounded p-8 shadow-xl"
+          className="space-y-4 bg-white p-8 rounded-sm border-2 border-brand-purple w-1/2 mx-auto"
         >
           <div>
             <Label name="Name" className="label" errorClassName="label error" />
             <TextField
               name="name"
-              className="border rounded border-brand-purple bg-brand-white p-2 w-full focus:border-brand-pink"
-              errorClassName="border rounded border-brand-purple bg-brand-white p-2 w-full focus:border-brand-pink"
+              className="border rounded-sm border-brand-purple bg-brand-white p-2 w-full focus:border-brand-pink"
+              errorClassName="border rounded-sm border-brand-purple bg-brand-white p-2 w-full focus:border-brand-pink"
               validation={{ required: true }}
             />
             <FieldError name="name" className="error-message" />
@@ -73,19 +81,19 @@ const CreateGuildPage = () => {
                 value={email}
                 placeholder="mj@gmail.com"
                 onChange={(e) => setEmail(e.target.value)}
-                className="border rounded border-brand-purple bg-brand-white p-2 w-full focus:border-brand-pink"
+                className="border rounded-sm border-brand-purple bg-brand-white p-2 w-full focus:border-brand-pink"
               />
 
               <button
                 onClick={handleAddUser}
-                className="px-3 py-1 bg-gray-300 hover:bg-opacity-75 rounded"
+                className="text-brand-purple hover:text-brand-pink px-3"
               >
                 Invite
               </button>
             </div>
 
             {!!users.length && (
-              <div className="rounded px-4 bg-gray-100 bg-opacity-50 divide-y divide-gray-200 mt-2">
+              <div className="rounded-sm px-4 bg-gray-100 bg-opacity-50 divide-y divide-gray-200 mt-2">
                 {users.map((user, index) => (
                   <div
                     key={index}
@@ -103,7 +111,7 @@ const CreateGuildPage = () => {
             )}
           </div>
 
-          <Submit className="bg-gray-800 hover:bg-opacity-75 text-white px-3 py-2 rounded">
+          <Submit className="bg-brand-purple hover:bg-opacity-75 text-white px-3 py-2 rounded-sm">
             Create
           </Submit>
         </Form>

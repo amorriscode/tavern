@@ -4,8 +4,9 @@ export const schema = gql`
     name: String!
     experience: Int!
     createdAt: DateTime!
-    Transaction: [Transaction]!
+    transactions: [Transaction]!
     users: [User]!
+    assignedProblems: [AssignedProblem]!
   }
 
   type Query {
