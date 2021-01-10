@@ -18,11 +18,12 @@ model Difficulty {
 }
 
 model TestCase {
-  id        Int     @id @default(autoincrement())
-  problem   Problem @relation(fields: [problemId], references: [id])
+  id        Int        @id @default(autoincrement())
+  problem   Problem    @relation(fields: [problemId], references: [id])
   problemId Int
   input     String
   output    String
+  Solution  Solution[]
 }
 
 enum Language {
@@ -49,7 +50,20 @@ model Problem {
   testCases        TestCase[]
   scaffolds        Scaffold[]
   checksum         String?
+  entrypoints      Json?
   assignedProblems AssignedProblem[]
+}
+
+model Solution {
+  id            String    @id @default(uuid())
+  body          String
+  success       Boolean
+  testCase      TestCase? @relation(fields: [testCaseId], references: [id]) // test case they failed if they failed
+  testCaseId    Int?
+  output        String? // output they got (wrong one)
+  executionTime Int
+  stacktrace    String?
+  errorLogs     String[] // logs for test case the failed if failed
 }
 
 model Guild {

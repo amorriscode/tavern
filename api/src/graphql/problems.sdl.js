@@ -11,11 +11,37 @@ export const schema = gql`
     testCases: [TestCase]!
     scaffolds: [Scaffold]!
     checksum: String
+    entrypoints: JSON
+  }
+
+  type SingleProblemRun {
+    problem: Problem!
+    testCase: TestCase!
+    success: Boolean
+    logs: [String]!
+    error: Boolean
+    stacktrace: String
+  }
+
+  type ProblemSubmitionResult {
+    problem: Problem!
+    solution: Solution!
+    testCaseNumber: Int
+    totalTestCaseNumber: Int
   }
 
   type Query {
     problems: [Problem!]!
     problem(id: Int!): Problem!
+  }
+
+  type Mutation {
+    runProblem(id: Int!, body: String!, language: Language!): SingleProblemRun
+    submitProblem(
+      id: Int!
+      body: String!
+      language: Language!
+    ): ProblemSubmitionResult
   }
 
   input CreateProblemInput {
@@ -26,6 +52,7 @@ export const schema = gql`
     sampleInput: String!
     sampleOutput: String!
     checksum: String
+    entrypoints: JSON
   }
 
   input UpdateProblemInput {
@@ -36,5 +63,6 @@ export const schema = gql`
     sampleInput: String
     sampleOutput: String
     checksum: String
+    entrypoints: JSON
   }
 `
