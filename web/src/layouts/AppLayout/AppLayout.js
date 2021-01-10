@@ -5,7 +5,7 @@ const AppLayout = ({ children }) => {
     <>
       <Nav />
 
-      <div className="px-4">{children}</div>
+      <div>{children}</div>
     </>
   )
 }
