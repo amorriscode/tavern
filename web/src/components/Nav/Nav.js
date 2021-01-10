@@ -15,7 +15,7 @@ const Nav = () => {
       </div>
 
       <div className="w-1/2 space-x-4 flex justify-end items-center">
-        <Link to={routes.home()}>Character Sheet</Link>
+        <Link to={routes.profile()}>Character Sheet</Link>
 
         <Link to={routes.home()}>Guild</Link>
 

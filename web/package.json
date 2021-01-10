@@ -26,6 +26,7 @@
     "react-monaco-editor": "^0.41.2"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "autoprefixer": "9.8.6",
     "postcss-loader": "4.0.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
