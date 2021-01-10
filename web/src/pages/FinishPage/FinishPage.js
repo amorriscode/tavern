@@ -7,18 +7,16 @@ import { useState } from 'react'
 const FinishPage = () => {
   const { currentUser, isAuthenticated } = useAuth()
 
-  if (!isAuthenticated) {
-    return <Redirect to={routes.home()}></Redirect>
-  }
+  // if (!isAuthenticated) {
+  //   return <Redirect to={routes.home()}></Redirect>
+  // }
 
   let part
-  if (!currentUser.outfit) {
-    part = SetCharacter()
-  } else if (!currentUser.name) {
-    part = SetName()
-  } else {
-    return <Redirect to={routes.home()}></Redirect>
-  }
+  // if (!currentUser.outfit) {
+  part = SetCharacter()
+  // } else if (!currentUser.name) {
+  //   part = SetName()
+  // }
 
   return <AppLayout>{part}</AppLayout>
 }

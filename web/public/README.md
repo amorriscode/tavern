@@ -1,36 +1,43 @@
-# Static Assets
-Use this folder to add static files directly to your app. All included files and folders will be copied directly into the `/dist` folder (created when Webpack builds for production). They will also be available during development when you run `yarn rw dev`.
->Note: files will *not* hot reload while the development server is running. You'll need to manually stop/start to access file changes.
+# Tavern 🍻
 
-### Example Use
-A file like `favicon.png` will be copied to `/dist/favicon.png`. A folder containing a file such as `static-files/my-logo.jpg` will be copied to `/dist/static-files/my-logo.jpg`. These can be referenced in your code directly without any special handling, e.g.
-```
-<link rel="icon" type="image/png" href="/favicon.png" />
-```
-and
-```
-<img src="/static-files/my-logo.jpg"> alt="Logo" />
-```
+Four adventurers set out on a mission for 24 cold hours during the dawn of the year 2021. They had no idea what dangers they would face but together their bond grew stronger. Let this be a lesson to any evil wizards lurking in the realm of Tavern!
 
-Behind the scenes, we are using Webpack's ["copy-webpack-plugin"](https://github.com/webpack-contrib/copy-webpack-plugin).
+This repo contains all the code for our [2021 nwHacks hackathon](https://www.nwhacks.io/) submission. We spent the last 24 hours coding, drinking energy drinks, coding, and not sleeping. It was a blast and we look forward to next year!
 
-## Best Practices
-Because assets in this folder are bypassing the javascript module system, **this folder should be used sparingly** for assets such as favicons, robots.txt, manifests, libraries incompatible with Webpack, etc.
+## Inspiration
 
-In general, it's best to import files directly into a template, page, or component. This allows Webpack to include that file in the bundle, which ensures Webpack will correctly process and move assets into the distribution folder, providing error checks and correct paths along the way.
+We've all had technical interviews to prepare for. It's tough even on the best of days. In the end, success comes from consistency.
 
-### Example Asset Import with Webpack
-Instead of handling our logo image as a static file per the example above, we can do the following:
-```
-import React from "react"
-import logo from "./my-logo.jpg"
+## What it does
 
+With Tavern, you don't have to go at it alone. Algorithm challenges are now more like your favourite roleplaying game than interview preparation. Each day your guild unlocks up to 6 algorithm challenges to solve while competing for the top spots on a global leaderboard and opportunities to apply for exclusive job postings!
 
-function Header() {
-  return <img src={logo} alt="Logo" />
-}
+## How we built it
 
-export default Header
-```
+We knew we'd be pressed for time during this hackathon. It always comes down to the wire. With only 24 hours to get something off the ground, we utilized Redwood JS to help us move fast. With Redwood we wouldn't have to worry about tedious boilerplate or configuration, allowing us to get right to the heart of the product.
 
-Behind the scenes, we are using Webpack's ["file-loader"](https://webpack.js.org/loaders/file-loader/) and ["url-loader](https://webpack.js.org/loaders/url-loader/) (for files smaller than 10kb).
+## Challenges we ran into
+
+From the start we wanted to have a rich character creator to connect with your inner roleplaying gamer. We chose SVG for layers of the character creation tool knowing that it would allow us an opportunity to scale our images and keep them crisp. The SVGs brought along a bunch of challenges we didn't expect, so we ended up going with a simpler random character generator in the end.
+
+![messed up character](https://cdn.discordapp.com/attachments/794419266052161566/797688591606218792/Screen_Shot_2021-01-09_at_8.49.32_PM.png)
+
+## Accomplishments that we're proud of
+
+We survived! We worked until the sun came up (and one of us still hasn't slept). We're brought of how the app looks, runs, and that our characters look so darn good! This was the first time we've done a hackathon together and we're grateful for the experience.
+
+![problem solving page](https://cdn.discordapp.com/attachments/794419266052161566/797920267216093214/Screen_Shot_2021-01-10_at_12.10.12_PM.png)
+
+## What we learned
+
+- Working with SVGs is hard
+- Estimates are hard
+- It's always a good thing to under-scope and over-deliver
+- Energy drinks work wonders
+
+## What's next for Tavern
+
+Who knows?! We love the product and love solving algorithms together. Maybe the next time you prepare for interviews you'll be competing against a global leaderboard as a half-elf wizard!
+
+Happy adventuring,
+[Alex](https://github.com/bizarre/), [Alice](https://github.com/alicelovescake), [Anthony](https://github.com/amorriscode), and [Jet](https://github.com/jetsimon/)
