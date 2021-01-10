@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Hint from 'src/components/Hint'
 import Example from 'src/components/Example'
 import Console from 'src/components/Console'
+import DifficultyPill from 'src/components/DifficultyPill'
 
 export const QUERY = gql`
   query ProblemQuery($id: Int!) {
@@ -55,12 +56,7 @@ export const Success = ({ problem, navHeight }) => {
             </h1>
 
             <div>
-              <div
-                className={`uppercase text-white rounded px-4 py-2 text-xs font-bold`}
-                style={{ backgroundColor: problem?.difficulty.color }}
-              >
-                {problem?.difficulty.name}
-              </div>
+              <DifficultyPill difficulty={problem?.difficulty} />
             </div>
           </div>
 
@@ -93,7 +89,7 @@ export const Success = ({ problem, navHeight }) => {
             onChange={handleCodeChange}
           />
 
-          <Console />
+          <Console problem={problem.id} code={code} language={language} />
         </div>
       </div>
 

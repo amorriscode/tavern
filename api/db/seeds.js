@@ -8,15 +8,17 @@ const hash = require('object-hash')
 
 dotenv.config()
 const db = new PrismaClient()
-var updated = false
+let updated = false
 
-async function createOrUpdateDifficulty(name, color, description) {
+async function createOrUpdateDifficulty(name, color, description, experience) {
   const difficulty = await db.difficulty.findUnique({ where: { name } })
   if (!difficulty) {
     console.info(
-      `Creating new difficulty: { ${name}, ${color}, ${description} }.`
+      `Creating new difficulty: { ${name}, ${color}, ${description}, ${experience} }.`
     )
-    await db.difficulty.create({ data: { name, color, description } })
+    await db.difficulty.create({
+      data: { name, color, description, experience },
+    })
     updated = true
   } else {
     if (difficulty.color !== color) {
@@ -31,14 +33,14 @@ async function createOrUpdateDifficulty(name, color, description) {
 
     await db.difficulty.update({
       where: { name },
-      data: { color, description },
+      data: { color, description, experience },
     })
   }
 }
 
 async function seedProblems() {
   const problems = await fs.readdir(problemRoot)
-  for (problem of problems) {
+  for (var problem of problems) {
     const stat = await fs.lstat(`${problemRoot}/${problem}`)
     if (stat.isDirectory()) {
       console.info(`Attempting to seed problem from directory '${problem}'..`)
@@ -63,7 +65,7 @@ async function seedProblems() {
       const scaffoldFiles = await fs.readdir(
         `${problemRoot}/${problem}/scaffolds`
       )
-      for (scaffoldName of scaffoldFiles) {
+      for (var scaffoldName of scaffoldFiles) {
         const extension = scaffoldName.split('.').pop()
         const body = await fs.readFile(
           `${problemRoot}/${problem}/scaffolds/${scaffoldName}`,
@@ -82,7 +84,7 @@ async function seedProblems() {
       }
 
       const testCases = []
-      for (rawTestCase of rawTestCases) {
+      for (var rawTestCase of rawTestCases) {
         testCases.push({
           input: JSON.stringify(rawTestCase.input),
           output: JSON.stringify(rawTestCase.output),
@@ -99,6 +101,7 @@ async function seedProblems() {
         sampleOutput: metadata.sample.output,
         testCases: { create: testCases },
         scaffolds: { connectOrCreate: scaffolds },
+        entrypoints: metadata.entrypoints,
       }
 
       model['checksum'] = hash(model)
@@ -111,6 +114,8 @@ async function seedProblems() {
           console.info(
             `Outdated checksum for problem ${model.id} (${problem})! Updating DB.`
           )
+
+          await db.testCase.deleteMany({ where: { problemId: metadata.id } })
           await db.problem.update({
             where: { id: metadata.id },
             data: model,
@@ -147,9 +152,9 @@ async function main() {
   //     await db.user.create({ data: { name: 'Admin', email: 'admin@email.com' }})
   //   }
 
-  await createOrUpdateDifficulty('Easy', '#52fd74', 'An easy challenge.')
-  await createOrUpdateDifficulty('Medium', '#fdd852', 'A medium challenge.')
-  await createOrUpdateDifficulty('Hard', '#fd5251', 'A hard challenge.')
+  await createOrUpdateDifficulty('Easy', '#52fd74', 'An easy challenge.', 5)
+  await createOrUpdateDifficulty('Medium', '#fdd852', 'A medium challenge.', 10)
+  await createOrUpdateDifficulty('Hard', '#fd5251', 'A hard challenge.', 15)
 
   await seedProblems()
 

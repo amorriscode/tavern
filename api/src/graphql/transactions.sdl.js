@@ -14,10 +14,7 @@ export const schema = gql`
   }
 
   input CreateTransactionInput {
-    guildId: String
     delta: Int!
-    result: Int!
-    time: DateTime!
   }
 
   input UpdateTransactionInput {

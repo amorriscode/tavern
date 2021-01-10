@@ -4,13 +4,15 @@ export const schema = gql`
     name: String!
     experience: Int!
     createdAt: DateTime!
-    Transaction: [Transaction]!
+    transactions: [Transaction]!
     users: [User]!
+    assignedProblems: [AssignedProblem]!
   }
 
   type Query {
     guilds: [Guild!]!
     guild(id: String!): Guild
+    topGuilds: [Guild!]!
   }
 
   input CreateGuildInput {
@@ -20,6 +22,7 @@ export const schema = gql`
 
   input UpdateGuildInput {
     name: String
+    experience: Int
   }
 
   type Mutation {

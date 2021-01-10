@@ -26,9 +26,12 @@ const Modal = ({ children, open, onModalClose }) => {
       {isOpen && (
         <Portal selector="body">
           <div className="z-50 fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center px-5 bg-black bg-opacity-5">
-            <div className="p-10 bg-white rounded shadow-lg relative" ref={ref}>
+            <div
+              className="p-10 bg-white rounded-sm border-2 border-brand-purple relative"
+              ref={ref}
+            >
               <RiCloseLine
-                className="absolute top-0 right-0 m-1 hover:cursor-pointer hover:text-gray-300"
+                className="absolute top-0 right-0 m-1 hover:cursor-pointer hover:text-gray-600 text-2xl"
                 onClick={handleClose}
               />
               {children}
