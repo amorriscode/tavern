@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MonacoEditor from 'react-monaco-editor'
 
-import { NAV_HEIGHT, DIFFICULTY_COLORS } from 'src/constants'
+import { DIFFICULTY_COLORS } from 'src/constants'
+import { getNavHeight } from 'src/lib/nav'
 
 import AppLayout from 'src/layouts/AppLayout'
 import Hint from 'src/components/Hint'
@@ -10,6 +11,11 @@ import Console from 'src/components/Console'
 
 const ProblemPage = () => {
   const [code, setCode] = useState('')
+  const [navHeight, setNavHeight] = useState('')
+
+  useEffect(() => {
+    setNavHeight(getNavHeight())
+  }, [])
 
   const handleCodeChange = (newValue) => setCode(newValue)
 
@@ -18,7 +24,7 @@ const ProblemPage = () => {
       <div className="flex">
         <div
           className="w-2/5 p-8 space-y-10 border-r-2 overflow-y-scroll"
-          style={{ height: `calc(100vh - ${NAV_HEIGHT})` }}
+          style={{ height: `calc(100vh - ${navHeight}px)` }}
         >
           <div className="flex justify-between">
             <h1 className="font-extrabold text-4xl text-gray-900">
@@ -85,6 +91,14 @@ const ProblemPage = () => {
           <Console />
         </div>
       </div>
+
+      <style>
+        {`
+          body {
+            overflow: hidden;
+          }
+        `}
+      </style>
     </AppLayout>
   )
 }
