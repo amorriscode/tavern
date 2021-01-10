@@ -3,6 +3,8 @@ import { useAuth } from '@redwoodjs/auth'
 
 import AppLayout from 'src/layouts/AppLayout'
 
+import splash from 'src/images/splash.png'
+
 const HomePage = () => {
   const { currentUser, isAuthenticated } = useAuth()
 
@@ -14,14 +16,15 @@ const HomePage = () => {
 
   return (
     <AppLayout>
-      <h1>HomePage</h1>
-      <p>
-        Find me in <code>./web/src/pages/HomePage/HomePage.js</code>
-      </p>
-      <p>
-        My default route is named <code>home</code>, link to me with `
-        <Link to={routes.home()}>Home</Link>`
-      </p>
+      <div className=""></div>
+      <h1 className="bg-white py-10 text-center font-semibold tracking-widest text-3xl">
+        Welcome to Tavern! Ready for adventure?
+      </h1>
+      <img
+        className="w-screen"
+        src={splash}
+        alt="Welcome to Tavern! Ready for adventure?"
+      ></img>
     </AppLayout>
   )
 }
