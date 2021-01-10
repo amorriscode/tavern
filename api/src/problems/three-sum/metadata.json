@@ -1,0 +1,18 @@
+{
+  "id": 3,
+  "name": "Three Sum",
+  "description": "Write a function that takes a non-empty array of distinct integers and an integer representing a target sum. The function should find all triplets in the input array sum up to the target sum and return an array of these triplets. The numbers in each triplet should be ordered in ascending order If no two numbers sum up to the target sum, the function should return an empty array.",
+  "difficulty": "Medium",
+  "hints": [
+    "Using three for loops to calculate the sums of all possible triplets in the array would generate an algo that runs in O(n^3) times . Can you come up with something faster using only two for loops?",
+    "Try sorting the array and traversing it once. At each number, place a left pointer on the number immediately to the right of your current number and a right pointer on the final number in the array. Check if the current number, the left number, and the right number sum up to the target sum. How can you proceed from there, remembering the fact that you sorted the array?",
+    "Since the array is now sorted, you know that moving the left pointer in hint 2 one place to the right will lead to a greater left number and thus a greater sum. Similarly, you know that moving the right pointer one place to the left will lead to a smaller right number and thus a smaller sum. This means that depending on the size of each triplet's (current num, left num, right num) sum relative to the target sum, you should either move the left pointer, the right pointer or both to obtain a potentially valid triplet"
+  ],
+  "sample": {
+    "input": "[12, 3, 1, 2, -6, 5, -8, 6], 0",
+    "output": "[[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]] //the numbers could be in reverse order"
+  },
+  "entrypoints": {
+    "js": "threeSum($1, $2)"
+  }
+}

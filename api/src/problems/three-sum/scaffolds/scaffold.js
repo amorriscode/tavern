@@ -1,0 +1,1 @@
+function threeSum(array, target) {}

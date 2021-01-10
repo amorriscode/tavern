@@ -1,0 +1,18 @@
+{
+  "id": 2,
+  "name": "Nth Fibonacci",
+  "description": "The Fibonacci sequence is defined as follows: the first number of the sequence is 0, the second number is 1, and the nth number is the sum of the (n-1)th and (n-2)th numbers. Write a function that takes in an integer n and returns the nth Fibonacci number.",
+  "difficulty": "Easy",
+  "hints": [
+    "The formula to generate the nth Fibonacci number can be written as follows: F(n)= F(n-1)+ F(n-2). Think of the cases(s) for which this formula doesn't apply (the base cases(s)) and try to implement a simple recursive algorithm to find the nth Fibonacci number with this formula",
+    "What are the runtime implications of solving this problem as is described in Hint 1? Can you use memoization(caching) to improve the performance of your algorithm?",
+    "Realize that to calculate any single Fibonacci number you need to have the two previous Fib numbers. Knowing this, can you implement an iterative algorithm to solve this question, storing only the last two Fib numbers at any given time?"
+  ],
+  "sample": {
+    "input": "n = 6",
+    "output": "5 // 0, 1, 1, 2, 3, 5"
+  },
+  "entrypoints": {
+    "js": "getNthFib($1)"
+  }
+}
