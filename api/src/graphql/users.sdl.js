@@ -7,7 +7,6 @@ export const schema = gql`
     level: Int!
     title: Title!
     titleId: String!
-    issuer: String!
   }
 
   type Query {

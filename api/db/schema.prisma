@@ -81,7 +81,6 @@ model User {
   level   Int
   title   Title   @relation(fields: [titleId], references: [id])
   titleId String
-  issuer  String  @unique
 }
 
 model Title {
